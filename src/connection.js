@@ -494,15 +494,17 @@ class Connection extends EventEmitter {
       }
 
       if (config.options.port !== undefined) {
-        if (typeof config.options.port !== 'number') {
+        const port = +config.options.port;
+
+        if (typeof port !== 'number') {
           throw new TypeError('The "config.options.port" property must be of type number.');
         }
 
-        if (config.options.port <= 0 || config.options.port >= 65536) {
+        if (port <= 0 || port >= 65536) {
           throw new RangeError('The "config.options.port" property must be > 0 and < 65536');
         }
 
-        this.config.options.port = config.options.port;
+        this.config.options.port = port;
         this.config.options.instanceName = undefined;
       }
 
